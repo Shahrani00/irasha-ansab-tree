@@ -3,403 +3,277 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>شجرة نسب إراشة بن عنز بن وائل | حتى إسماعيل عليه السلام</title>
+<title>إراشة بن عنز بن وائل — سجل النسب وخريطة الديار</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0e3535">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Marhey:wght@300;400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --paper:#fdfdf8; --ink:#1e2a3a; --blue:#1a5fb4; --red:#d64545;
-  --green:#1d8a5f; --orange:#b45309; --bark:#7c4a21;
-  --card-shadow:0 3px 0 rgba(30,42,58,.9);
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:#e8e4d8;font-family:'Marhey',system-ui,sans-serif;color:var(--ink);
-  background-image:radial-gradient(#d5cfbe 1px,transparent 1px);background-size:22px 22px}
-.wrap{max-width:560px;margin:0 auto;padding:10px 10px 60px}
-@media(min-width:900px){.wrap{max-width:1020px}}
-.board{background:var(--paper);border-radius:18px;border:3px solid var(--ink);
-  box-shadow:6px 6px 0 var(--ink);overflow:hidden;position:relative}
-.board::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(#00000008 1px,transparent 1px),linear-gradient(90deg,#00000008 1px,transparent 1px);
-  background-size:28px 28px}
-.marker-bar{display:flex;gap:8px;justify-content:center;padding:12px 8px 0;align-items:center;flex-wrap:wrap}
-.dot{width:16px;height:16px;border-radius:50%;border:2px solid var(--ink)}
-header.hero{position:relative;text-align:center;padding:10px 16px 6px}
-.hero h1{font-family:'Aref Ruqaa',serif;font-size:26px;line-height:1.6;margin:8px 0 2px}
-@media(min-width:900px){.hero h1{font-size:34px}}
-.hero h1 .hl{background:linear-gradient(transparent 55%,#ffe45e 55%,#ffe45e 92%,transparent 92%);padding:0 6px}
-.designer{display:inline-block;margin:8px auto 4px;padding:8px 14px;background:#fff;
-  border:2.5px dashed var(--blue);border-radius:14px;font-size:13.5px;line-height:1.9;transform:rotate(-.6deg)}
-.designer b{color:var(--blue)}
-.designer .mail{font-family:'Caveat',cursive;font-size:17px;direction:ltr;display:block;color:#333}
-.badge-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px}
-.badge{font-size:12px;border:2px solid var(--ink);border-radius:20px;padding:4px 12px;background:#fff;box-shadow:2px 2px 0 var(--ink)}
-.toolbar{position:sticky;top:0;z-index:30;background:#fdfdf8ee;backdrop-filter:blur(6px);
-  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:8px;display:flex;gap:8px}
-.toolbar input{flex:1;border:2px solid var(--ink);border-radius:12px;padding:10px 12px;font-family:inherit;font-size:14px;background:#fff;min-width:0}
-.toolbar button{border:2px solid var(--ink);border-radius:12px;background:#1e2a3a;color:#fff;font-family:inherit;font-size:13px;padding:0 14px;box-shadow:2px 2px 0 #000;white-space:nowrap}
-section{padding:14px 12px;position:relative}
-@media(min-width:900px){section{padding:20px 26px}}
-h2.sec{font-family:'Aref Ruqaa',serif;font-size:20px;margin:6px 0 10px;display:flex;align-items:center;gap:8px}
-@media(min-width:900px){h2.sec{font-size:24px}}
-h2.sec::before{content:"🌿";background:#ffe45e;border:2px solid var(--ink);border-radius:10px;padding:0 7px;font-size:16px}
-.note{background:#fffbe6;border:2px solid var(--ink);border-radius:14px;padding:10px 12px;font-size:13px;line-height:2;box-shadow:3px 3px 0 var(--ink)}
-.note.red{background:#fff0f0}.note.green{background:#eefaf3}.note.blue{background:#eaf2ff}
-/* ===== جذع الشجرة ===== */
-.trunk{display:flex;flex-direction:column;align-items:stretch;gap:0;margin-top:10px;position:relative}
-@media(min-width:900px){.trunk{display:grid;grid-template-columns:1fr 1fr;gap:10px}.trunk .tconn{display:none}}
-.person{border:2.5px solid var(--bark);border-radius:6px 26px 6px 26px;background:#fff;
-  padding:10px 12px;display:flex;align-items:center;gap:10px;box-shadow:var(--card-shadow);
-  cursor:pointer;font-size:14px;font-weight:600;user-select:none}
-.person small{display:block;font-weight:400;font-size:12px;color:#555;line-height:1.8}
-.person .num{min-width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  background:var(--bark);color:#fff;font-size:13px;border:2px solid #4a2c12;flex-shrink:0}
-.person.prophet{background:#e8f4ff;border-color:var(--blue)}
-.person.adnan{background:#fff4d6;border-color:var(--ink)}
-.person.irasha{background:#ffe45e;border-color:var(--ink);font-size:15px}
-.tconn{display:flex;flex-direction:column;align-items:center}
-.tconn::after{content:"";width:6px;height:16px;background:repeating-linear-gradient(var(--bark) 0 4px,transparent 4px 8px);border-radius:3px}
-.detail{display:none;background:#fff;border:2px dashed var(--ink);border-radius:12px;margin:6px 0 8px;padding:10px;font-size:13px;line-height:2}
-.detail.open{display:block}
-/* ===== الشجرة: أوراق ===== */
-.legend{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
-.tag{font-size:12px;border:2px solid var(--ink);border-radius:20px;padding:3px 12px;background:#fff}
-.tag.true{background:#dff5e6}.tag.ally{background:#fff3d6}.tag.place{background:#e3efff}.tag.old{background:#f3e8ff}
-.tree-node{margin:8px 0}
-.leaf{width:100%;text-align:right;border:2.5px solid var(--ink);border-radius:8px 30px 8px 30px;
-  background:#fff;padding:12px 12px 12px 8px;box-shadow:var(--card-shadow);
-  font-family:inherit;cursor:pointer;display:flex;gap:10px;align-items:center;font-size:14px}
-.leaf:active{transform:scale(.98)}
-.leaf .emoji{font-size:22px;flex-shrink:0}
-.leaf .t{flex:1;min-width:0}
-.leaf .t b{font-size:14.5px;display:block}
-.leaf .t span{font-size:12px;color:#555;line-height:1.9;display:block}
-.leaf .plus{width:32px;height:32px;flex-shrink:0;border-radius:50%;border:2px solid var(--ink);
-  display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700;background:#ffe45e}
-.leaf.true{background:#e9f9ef;border-color:var(--green)}
-.leaf.ally{background:#fff8e1;border-style:dashed}
-.leaf.place{background:#eaf2ff}
-.leaf.old{background:#f5effe}
-.leaf.root{background:#ffe45e;font-size:15px}
-.verdict{display:inline-block;font-size:11px;border-radius:12px;padding:1px 10px;margin-top:4px;border:1.5px solid var(--ink)}
-.verdict.ok{background:#1d8a5f;color:#fff}
-.verdict.warn{background:#fff;color:#8a5a00;border-color:#8a5a00}
-.verdict.info{background:#1a5fb4;color:#fff}
-.branches{display:none;margin:6px 10px 6px 0;padding:6px 12px 6px 0;border-right:4px solid #999;border-radius:4px}
-.branches.open{display:block}
-.branches.true{border-color:var(--green);border-right-style:solid}
-.branches.ally{border-color:var(--orange);border-right-style:dashed}
-.branches.place{border-color:var(--blue);border-right-style:dotted}
-.branches.old{border-color:#7c3aed}
-@media(min-width:900px){
-  #tree>.tree-node>.branches.open{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
-  #tree>.tree-node>.branches.open>.tree-node{margin:6px 0}
-}
-#infoPanel{position:sticky;bottom:8px;z-index:20;background:#1e2a3a;color:#fff;border:3px solid #000;
-  border-radius:16px;padding:12px 14px;font-size:13px;line-height:2;display:none;box-shadow:4px 4px 0 #000}
-#infoPanel.show{display:block}
-#infoPanel a{color:#ffe45e}
-#infoPanel .x{float:left;background:#fff;color:#000;border-radius:50%;width:26px;height:26px;border:none;font-weight:700;cursor:pointer}
-.compare{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
-@media(min-width:900px){.compare{grid-template-columns:1fr 1fr}}
-.cmp{border:2.5px solid var(--ink);border-radius:14px;padding:12px;background:#fff;box-shadow:3px 3px 0 var(--ink);font-size:13px;line-height:2}
-.cmp.ok{border-color:var(--green);background:#eefaf3}
-.cmp.warn{border-color:var(--orange);background:#fff8e6}
-.check{border:2px solid var(--ink);border-radius:12px;padding:10px 12px;margin:8px 0;font-size:13px;line-height:2;background:#fff;box-shadow:2px 2px 0 var(--ink)}
-.mapbox{border:3px solid var(--ink);border-radius:16px;overflow:hidden;box-shadow:4px 4px 0 var(--ink);background:#fff}
-#map{height:380px;width:100%;z-index:1}
-@media(min-width:900px){#map{height:460px}.loc-list{grid-template-columns:repeat(4,1fr)!important}}
-.loc-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.loc{background:#fff;border:2px solid var(--ink);border-radius:12px;padding:8px;font-size:12px;line-height:1.9;box-shadow:2px 2px 0 var(--ink);cursor:pointer}
-.loc b{display:block;font-size:13px}
-.src{background:#fff;border:2px solid var(--ink);border-radius:12px;padding:10px 12px;margin:8px 0;font-size:13px;line-height:2;box-shadow:2px 2px 0 var(--ink)}
-.src b{color:var(--blue)}
-.src a{color:var(--blue);font-weight:700;word-break:break-all}
-footer{text-align:center;font-size:12px;color:#555;padding:18px;line-height:2}
-.btn-row{display:flex;gap:8px;margin:10px 0}
-.btn{flex:1;border:2.5px solid var(--ink);border-radius:14px;padding:12px;font-family:inherit;font-weight:700;font-size:14px;box-shadow:3px 3px 0 var(--ink);cursor:pointer}
-.btn.b{background:#1e2a3a;color:#fff}.btn.y{background:#ffe45e}
-mark{background:#ffe45e;padding:0 4px;border-radius:4px;color:#000}
-.tree-art{text-align:center;font-size:13px;line-height:1.4;color:var(--bark);font-weight:700}
+:root{--bg:#f6f1e5;--ink:#232a33;--mut:#6b7280;--gold:#b8860b;--teal:#0e3535;--teal2:#134545;--line:#e5dcc3;--card:#fffef9;--s:#0e7a4f;--h:#9a6200;--p:#1d5fc0;--o:#6d3fd1;--a:#b03060}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Arabic',system-ui,sans-serif}
+/* hero — هوية داكنة مختلفة تماما */
+.hero{background:radial-gradient(1000px 300px at 50% -80px,#1d5a5a 0%,transparent 60%),linear-gradient(180deg,#0c2222,#0e3535 70%,#0a2828);color:#f5edd6;padding:34px 18px 0;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;opacity:.16;background-image:repeating-linear-gradient(45deg,#c9a227 0 1px,transparent 1px 26px),repeating-linear-gradient(-45deg,#c9a227 0 1px,transparent 1px 26px)}
+.hero-inner{max-width:1120px;margin:0 auto;position:relative;display:grid;gap:14px;padding-bottom:22px}
+@media(min-width:960px){.hero-inner{grid-template-columns:1.4fr .9fr;align-items:end}}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.2px;color:#e8d9a8;border:1px solid #6b5a1f;border-radius:999px;padding:5px 12px;background:#ffffff10}
+.kicker i{width:7px;height:7px;border-radius:50%;background:var(--gold);display:inline-block}
+.hero h1{font-family:'Amiri',serif;font-weight:700;font-size:30px;line-height:1.8;margin:8px 0 4px}
+@media(min-width:960px){.hero h1{font-size:42px}}
+.hero h1 em{font-style:normal;color:#ffd977;border-bottom:2px solid #c9a227}
+.hero p{margin:0;color:#d8cfae;font-size:14px;line-height:2;font-weight:300}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.stat{background:#ffffff0e;border:1px solid #ffffff22;border-radius:12px;padding:10px 14px;min-width:120px}
+.stat b{display:block;font-size:20px;color:#ffd977}.stat span{font-size:12px;color:#d8cfae}
+.searchbar{position:relative}
+.searchbar input{width:100%;background:#fffef9;border:1px solid var(--line);border-radius:14px;padding:14px 44px 14px 14px;font-family:inherit;font-size:14px;outline:none;box-shadow:0 10px 30px #0003}
+.searchbar::after{content:"⌕";position:absolute;right:16px;top:11px;font-size:20px;color:var(--gold)}
+/* nav */
+.nav{position:sticky;top:0;z-index:60;background:#f6f1e5ee;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1120px;margin:0 auto;display:flex;gap:8px;padding:10px 14px;overflow-x:auto}
+.nav a{text-decoration:none;color:var(--ink);font-size:13px;font-weight:700;border:1px solid var(--line);background:var(--card);padding:8px 16px;border-radius:999px;white-space:nowrap}
+.nav a.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.page{max-width:1120px;margin:0 auto;padding:18px 14px 80px;display:grid;gap:18px}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 24px #3a2f0a0d}
+@media(min-width:960px){.sec{padding:26px}}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-head .idx{font-family:'Amiri',serif;color:var(--gold);font-size:26px;line-height:1}
+.sec-head h2{margin:0;font-size:19px}
+.sec-head p{margin:2px 0 12px;color:var(--mut);font-size:13px;line-height:2}
+/* timeline spine — أفقي */
+.tl{display:flex;gap:0;overflow-x:auto;padding:14px 4px 10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.step{min-width:150px;position:relative;padding-top:18px;cursor:pointer;flex-shrink:0}
+.step::before{content:"";position:absolute;top:8px;right:20px;left:-10px;height:2px;background:var(--line)}
+.step:first-child::before{right:20px}
+.step i{position:absolute;top:1px;right:14px;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--gold);z-index:1}
+.step.hl i{background:var(--gold);box-shadow:0 0 0 5px #b8860b22}
+.step b{display:block;font-size:13px}.step small{font-size:11.5px;color:var(--mut);line-height:1.8;display:block}
+.step.hl b{color:var(--teal)}
+.step-detail{display:none;background:#0e35350d;border:1px dashed var(--teal);border-radius:12px;padding:10px 12px;font-size:13px;line-height:2;margin-top:10px}
+.step-detail.open{display:block}
+/* tree — مخطط متصل بخطوط */
+.key{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
+.key span{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:4px 11px;background:#fff;display:inline-flex;gap:6px;align-items:center}
+.dotk{width:10px;height:10px;border-radius:50%;display:inline-block}
+.tools{display:flex;gap:8px;margin-bottom:12px}
+.tools button{flex:1;font-family:inherit;font-size:13px;font-weight:700;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px;cursor:pointer}
+.tools button.dark{background:var(--teal);color:#fff;border-color:var(--teal)}
+.tree{border-right:2px solid var(--line);padding-right:0}
+.nd{position:relative;padding-right:22px;margin:0}
+.nd::before{content:"";position:absolute;right:0;top:0;bottom:0;width:22px;border-right:2px solid var(--line)}
+.nd:last-child::before{bottom:auto;height:30px}
+.nd::after{content:"";position:absolute;right:0;top:28px;width:22px;height:2px;background:var(--line)}
+.row{width:100%;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;font-family:inherit;text-align:right;margin:8px 0;transition:.15s}
+.row:hover{border-color:var(--gold);box-shadow:0 6px 18px #b8860b22}
+.row .av{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;background:#f4efe0;border:1px solid var(--line)}
+.row .tt{flex:1;min-width:0}.row .tt b{display:block;font-size:14px}.row .tt small{font-size:12px;color:var(--mut)}
+.row .ch{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--gold);flex-shrink:0;background:#fff}
+.tag{font-size:10.5px;font-weight:700;border-radius:999px;padding:2px 9px;margin-top:3px;display:inline-block}
+.tag.s{background:#e6f4ec;color:var(--s);border:1px solid var(--s)}
+.tag.h{background:#fff4d6;color:var(--h);border:1px solid var(--h)}
+.tag.p{background:#e8f0ff;color:var(--p);border:1px solid var(--p)}
+.tag.o{background:#f1eaff;color:var(--o);border:1px solid var(--o)}
+.tag.a{background:#ffeef5;color:var(--a);border:1px solid var(--a)}
+.nd[data-t="sulb"]>.row{border-right:4px solid var(--s)}
+.nd[data-t="half"]>.row{border-right:4px dashed var(--h)}
+.nd[data-t="place"]>.row{border-right:4px dotted var(--p)}
+.nd[data-t="old"]>.row{border-right:4px solid var(--o)}
+.nd[data-t="alam"]>.row{border-right:4px solid var(--a)}
+.nd[data-t="root"]>.row{background:linear-gradient(180deg,#fff8d6,#ffefa8);border-color:#c9a227}
+.kids{display:none}
+.kids.open{display:block}
+@media(min-width:960px){.kids.open.cols{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}}
+/* row detail — تفاصيل داخل الصف بدل النافذة */
+.rdetail{display:none;background:#0e35350d;border:1px dashed var(--teal);border-radius:12px;padding:10px 12px;font-size:13px;line-height:2;margin:0 0 8px}
+.rdetail.open{display:block}
+/* map split */
+.mapwrap{display:grid;gap:12px}
+@media(min-width:960px){.mapwrap{grid-template-columns:1.5fr .9fr}}
+#map{height:380px;border-radius:14px;z-index:1;border:1px solid var(--line)}
+@media(min-width:960px){#map{height:520px}}
+.side{background:#faf7ec;border:1px solid var(--line);border-radius:14px;padding:12px;max-height:520px;overflow:auto}
+.frow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.frow button{font-family:inherit;font-size:12px;font-weight:700;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer}
+.frow button.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.plc{width:100%;text-align:right;font-family:inherit;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:7px 0;cursor:pointer;font-size:12.5px;line-height:1.9}
+.plc b{display:block;font-size:13px}
+.plc.s{border-right:4px solid var(--s)}.plc.h{border-right:4px dashed var(--h)}.plc.p{border-right:4px dotted var(--p)}
+.src{border:1px solid var(--line);border-radius:12px;padding:11px 13px;background:#fff;font-size:13px;line-height:2;margin:8px 0}
+.src a{color:var(--p);font-weight:700;word-break:break-all}
+.warn{background:#fff8e2;border:1px solid #d9b400;border-radius:12px;padding:12px;font-size:13px;line-height:2}
+.ok{background:#eaf7ef;border:1px solid var(--s);border-radius:12px;padding:12px;font-size:13px;line-height:2}
+.grid2{display:grid;gap:10px}@media(min-width:960px){.grid2{grid-template-columns:1fr 1fr}}
+footer{text-align:center;color:var(--mut);font-size:12px;line-height:2;padding:10px}
+mark{background:#ffe45e;border-radius:4px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<div class="board">
-  <div class="marker-bar">
-    <div class="dot" style="background:#d64545"></div>
-    <div class="dot" style="background:#1a5fb4"></div>
-    <div class="dot" style="background:#1d8a5f"></div>
-    <div class="dot" style="background:#e67e22"></div>
-    <span style="font-size:12px">🖊️ لوحة الأنساب — تعمل على الجوال والكمبيوتر</span>
+<div class="hero"><div class="hero-inner">
+  <div>
+    <span class="kicker"><i></i> سجل الأنساب — تحقيق من المصادر الأولى</span>
+    <h1>إراشة بن عنز بن وائل <em>من عدنان إلى ديار اليوم</em></h1>
+    <p>تحقيق جديد من الصفر: ابن الكلبي • ابن حزم • الهمداني • البلاذري • ابن حجر. كل اسم في السجل يتوسع بالضغط حتى قبائل العصر الحاضر، مع خريطة الديار الحالية.</p>
+    <div class="stats"><div class="stat"><b>13</b><span>حلقة في الجذع</span></div><div class="stat"><b>4</b><span>بطون عسير السراة الصليبية</span></div><div class="stat"><b>19</b><span>موقعاً على الخريطة</span></div><div class="stat"><b>5</b><span>مصادر أولى معتمدة</span></div></div>
   </div>
-
-  <header class="hero">
-    <div class="badge-row">
-      <span class="badge">📱💻 جوال + كمبيوتر</span>
-      <span class="badge">🧬 عدنانية • ربيعة</span>
-      <span class="badge">🌳 شجرة بأوراق قابلة للضغط</span>
-    </div>
-    <h1>شجرة نسب القبائل المتفرعة<br>عن <span class="hl">إراشة بن عنز بن وائل</span><br>حتى إسماعيل بن إبراهيم <span style="font-size:15px">عليهما السلام</span></h1>
-    <div class="designer">
-      🎨 تصميم <b>المهندس محمد بن أحمد آل هادي الشهراني</b>
-      <span class="mail">Eng.Shahrani.MBA@hotmail.com</span>
-    </div>
-    <div class="note">🌿 اضغط على أي ورقة 🍃 في الشجرة لتتوسع الفروع وتظهر بطاقة التفصيل بالأسفل.</div>
-  </header>
-
-  <div class="toolbar">
-    <input id="q" placeholder="🔍 ابحث… (شهران، وادعة، رفيدة، بللحمر)">
-    <button onclick="expandAll()">توسيع الكل</button>
+  <div class="searchbar"><input id="q" placeholder="ابحث في السجل: مغيد، علكم، شهران، وادعة، الكوفة…"></div>
+</div></div>
+<div style="background:#0a2828;padding:0 18px 20px"><div style="max-width:1120px;margin:0 auto;display:flex;gap:10px;flex-wrap:wrap"><a href="mindmap.html" style="flex:1;min-width:260px;display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(180deg,#ffd977,#e0ac22);color:#0e3535;font-weight:800;font-size:15px;text-decoration:none;border-radius:14px;padding:14px 18px;box-shadow:0 10px 30px #0006">🧠 الخريطة الذهنية التفاعلية</a><a href="migrations.html" style="flex:1;min-width:260px;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #c9a227;color:#ffd977;font-weight:800;font-size:15px;text-decoration:none;border-radius:14px;padding:14px 18px">🧭 هجرات الفروع شمالاً + الخط الزمني</a></div></div>
+<div class="nav"><div class="nav-in">
+  <a href="#spine-sec" class="on">الجذع</a><a href="#tree-sec">السجل الموسع</a><a href="#note-sec">ضبط الأنساب</a><a href="#map-sec">الخريطة</a><a href="#src-sec">المصادر</a>
+  <a href="#" id="expAll" style="margin-right:auto">توسيع الكل</a>
+</div></div>
+<div class="page">
+  <div class="sec" id="spine-sec">
+    <div class="sec-head"><span class="idx">٠١</span><div><h2>الجذع الذهبي — عدنان ← إراشة</h2><p>مسار أفقي قابل للتمرير. اضغط أي حلقة لعرض ضبطها ومصدرها. الأحدث يساراً.</p></div></div>
+    <div class="tl" id="spine"></div>
+    <div id="spineInfo"></div>
   </div>
-
-  <section>
-    <h2 class="sec">جذع الشجرة: من إسماعيل إلى إراشة</h2>
-    <div class="note green">✅ المحفوظ عند النسّابين: <b>عنز بن وائل بن قاسط بن هنب بن أفصى بن دعمي بن جديلة بن أسد بن ربيعة بن نزار بن معد بن عدنان</b>. وما فوق عدنان إلى إسماعيل على المشهور مع التنبيه أن ألفاظه مختلف فيها.</div>
-    <div id="spine" class="trunk"></div>
-  </section>
-
-  <section>
-    <div class="tree-art">🌳<br>┃ الجذع: إراشة ┃<br>┣━━ 🌿 غصن صلب ━━ ✋ غصن حلف ━━ 📍 انتشار ━━ ⭐ أعلام ┫</div>
-    <h2 class="sec">أغصان إراشة: اضغط أي ورقة 🍃</h2>
-    <div class="legend">
-      <span class="tag true">🌿 صلب مثبت من عنز</span>
-      <span class="tag ally">✋ حلف وجوار (ليس صلباً)</span>
-      <span class="tag place">📍 انتشار قديم خارج الجزيرة</span>
-      <span class="tag old">📜 فرع قديم قلّت أخباره</span>
+  <div class="sec" id="tree-sec">
+    <div class="sec-head"><span class="idx">٠٢</span><div><h2>السجل الموسع — فروع إراشة إلى اليوم</h2><p>مخطط متصل بخطوط. اضغط أي صف فيتفرع ويفتح ملفه في اللوحة الجانبية.</p></div></div>
+    <div class="key">
+      <span><i class="dotk" style="background:var(--s)"></i> صلب عنز</span>
+      <span><i class="dotk" style="background:var(--h)"></i> حلف وجوار</span>
+      <span><i class="dotk" style="background:var(--p)"></i> انتشار قديم</span>
+      <span><i class="dotk" style="background:var(--o)"></i> فرع قديم</span>
+      <span><i class="dotk" style="background:var(--a)"></i> أعلام</span>
     </div>
-    <div class="btn-row">
-      <button class="btn y" onclick="expandAll()">🌿 توسيع الكل</button>
-      <button class="btn b" onclick="collapseAll()">📕 طي الكل</button>
+    <div class="tools"><button id="exp2">توسيع الكل</button><button class="dark" id="col2">طي الكل</button></div>
+    <div id="tree" class="tree"></div>
+  </div>
+  <div class="sec" id="note-sec">
+    <div class="sec-head"><span class="idx">٠٣</span><div><h2>ضبط دقيق — حتى لا يلتبس النسب بالجوار</h2><p>الخلاصة العلمية للتمييز بين الصلب والحلف.</p></div></div>
+    <div class="grid2">
+      <div class="ok"><b>رفيدة عسير — عدناني صليبي</b><br>من رفيدة بن عنز أخي إراشة، اندمج في عسير السراة (طبب وسراة رفيدة). ابن الكلبي: ولد عنز رفيدة وأراشة.</div>
+      <div class="warn"><b>رفيدة قحطان — مستقلة</b><br>مركزها أحد رفيدة، قحطانية. تشابه الاسم فقط. وشهران (خثعم)، ووادعة (همدان)، وبللحمر/بللسمر (الحجر الأزد)، ورجال ألمع (أزد شنوءة): جوار وحلف لا صلب إراشة.</div>
     </div>
-    <div id="tree"></div>
-    <div id="infoPanel"><button class="x" onclick="hideInfo()">×</button><div id="infoBody"></div></div>
-  </section>
-
-  <section>
-    <h2 class="sec">تنبيه مهم: رفيدة عسير ≠ رفيدة قحطان</h2>
-    <div class="compare">
-      <div class="cmp ok">🍃 <b>رفيدة عسير (ربيعة ورفيدة)</b><br>✅ <b>عدنانية من صلب عنز</b> — ترجع لرفيدة بن عنز أخي إراشة، واندمجت ذريته في عسير.<br>📍 السراة، أبها، طبب، سراة رفيدة.<br>📖 المصدر: ابن الكلبي (ولد عنز: رفيدة وأراشة) + الهمداني.</div>
-      <div class="cmp warn">✋ <b>رفيدة قحطان</b><br>⚠️ <b>قحطانية مستقلة — ليست من عنز</b> — تنسب لقحطان، تشابه أسماء فقط مع جوار وحلف.<br>📍 أحد رفيدة.<br>📖 المصدر: كتب أنساب قحطان ومذكورات عسير الحديثة.</div>
+  </div>
+  <div class="sec" id="map-sec">
+    <div class="sec-head"><span class="idx">٠٤</span><div><h2>خريطة الديار الحالية والقديمة</h2><p>اضغط أي موقع في القائمة للانتقال إليه. الأخضر صلب، الكركمي حلف، الأزرق انتشار قديم.</p></div></div>
+    <div class="mapwrap">
+      <div id="map"></div>
+      <div class="side"><div class="frow" id="filters"><button data-f="all" class="on">الكل</button><button data-f="sulb">صلب</button><button data-f="half">حلف</button><button data-f="place">انتشار</button></div><div id="locs"></div></div>
     </div>
-  </section>
-
-  <section>
-    <h2 class="sec">تدقيق الأنساب (تمت مراجعتها)</h2>
-    <div class="check">✋ <b>وادعة:</b> قبيلة <b>همدانية قحطانية</b> (وادعة همدان)، موطنها ظهران الجنوب ونجران — دخلت حلف عسير جواراً، <b>وليست من صلب إراشة</b>. <a href="https://ar.wikipedia.org/wiki/وادعة" target="_blank" rel="noopener">وادعة — ويكيبيديا</a></div>
-    <div class="check">✋ <b>بللحمر (بنو الأحمر) وبللسمر (بنو الأسمر):</b> قبيلتان <b>أزديتان من الحجر بن الهنوء</b> شمال أبها — ضمن نطاق عسير الجغرافي وحلفها، <b>وليستا من عنز صلباً</b>.</div>
-    <div class="check">✋ <b>شهران:</b> الأصل <b>خثعم</b> (شهران بن عفرس بن حلف بن خثعم) — سكنت <b>شعف إراشة</b> (ديار عنز القديمة) فعُرف الموضع بشعف شهران، ودخلت حلف الجوار. نِسبتها لعنز قول شعبي متأخر. <a href="https://ar.wikipedia.org/wiki/شهران_(قبيلة)" target="_blank" rel="noopener">شهران — ويكيبيديا</a></div>
-    <div class="check">📍 <b>الكوفة:</b> ثابت — <b>مسجد بني عنز بالكوفة</b> (البلاذري، فتوح البلدان) دليل انتشار مبكر بالعراق. ✅</div>
-    <div class="check">📍 <b>فلسطين:</b> ثابت — الصحابي <b>عبادة بن الأشيب العنزي</b> عِداده في أهل فلسطين (ابن حجر، الإصابة). ✅</div>
-    <div class="check">📍 <b>مصر:</b> ثابت — <b>مالك بن زيد العنزي</b> حليف الأزد بمصر (ابن الكلبي). ✅</div>
-    <div class="check">🍃 <b>عسير الصلبية:</b> <b>عسير بن إراشة بن عنز</b> (ابن الكلبي + نص الهمداني: عسير قبيلة من عنز). بطونها القديمة: بنو مالك، بنو غنم، بنو حديد، شيبة — والمعاصرة: مغيد، ربيعة ورفيدة (عسير)، علكم، بنو مالك. <a href="https://ar.wikipedia.org/wiki/قبيلة_عسير" target="_blank" rel="noopener">قبيلة عسير — ويكيبيديا</a></div>
-  </section>
-
-  <section>
-    <h2 class="sec">خريطة التواجد الحالي والقديم</h2>
-    <div class="note blue">📍 اضغط أي بطاقة للانتقال على الخريطة. الأخضر = صلب عنز، الأصفر = حلف وجوار، الأزرق = انتشار قديم.</div>
-    <div class="mapbox" style="margin-top:10px"><div id="map"></div></div>
-    <div id="locs" class="loc-list"></div>
-  </section>
-
-  <section>
-    <h2 class="sec">المصادر التاريخية المعتبرة (روابط مباشرة)</h2>
-    <div class="src">📖 <b>ابن الكلبي (ت 204هـ) – جمهرة النسب</b>، باب «وهؤلاء بنو عنز بن وائل» (رفيدة وأراشة ← قنان وعسير وجندلة).<br>🔗 <a href="https://shamela.ws/book/919/563" target="_blank" rel="noopener">النص على المكتبة الشاملة shamela.ws/book/919/563</a></div>
-    <div class="src">📖 <b>ابن حزم (ت 456هـ) – جمهرة أنساب العرب ص 303</b>، باب بنو عنز بن وائل.<br>🔗 <a href="https://shamela.ws/book/9793/300" target="_blank" rel="noopener">النص على الشاملة shamela.ws/book/9793/300</a></div>
-    <div class="src">📖 <b>الهمداني (ت 334هـ) – صفة جزيرة العرب</b>، مواضع جرش وأبها وبيشة وبطون عنز وعسير.<br>🔗 <a href="https://shamela.ws/book/12521/118" target="_blank" rel="noopener">النص على الشاملة shamela.ws/book/12521/118</a></div>
-    <div class="src">📖 <b>مقالة عنز بن وائل – ويكيبيديا</b> (تجمع النقول عن المصادر السابقة مع مراجعها).<br>🔗 <a href="https://ar.wikipedia.org/wiki/عنز_بن_وائل" target="_blank" rel="noopener">ar.wikipedia.org/wiki/عنز_بن_وائل</a></div>
-    <div class="src">📖 <b>قبيلة عنز بن وائل: جذور وحضور</b> (جمع لتراجم الأعلام).<br>🔗 <a href="https://archive.org/details/olomnasb_ymail_20170217" target="_blank" rel="noopener">archive.org — جذور وحضور</a></div>
-    <div class="src">📖 <b>تاريخ عسير – إبراهيم الحفظي ص 61</b>.<br>🔗 <a href="https://archive.org/details/20220915_20220915_2026" target="_blank" rel="noopener">archive.org — تاريخ عسير</a></div>
-    <div class="src">📖 <b>البلاذري – فتوح البلدان</b> (مسجد بني عنز بالكوفة) • <b>السمعاني – الأنساب</b> • <b>ابن ماكولا – الإكمال</b> • <b>ابن حجر – الإصابة وتبصير المنتبه</b> (عبادة بن الأشيب، آل الغاز، طلق بن حبيب، مالك بن زيد) — تُطلب ألفاظها من الشاملة وأرشيف الإنترنت بأسمائها.</div>
-    <div class="src">📖 <b>للتمييز الحديث:</b> <a href="https://ar.wikipedia.org/wiki/قبيلة_عسير" target="_blank" rel="noopener">قبيلة عسير</a> • <a href="https://ar.wikipedia.org/wiki/شهران_(قبيلة)" target="_blank" rel="noopener">شهران</a> • <a href="https://ar.wikipedia.org/wiki/وادعة" target="_blank" rel="noopener">وادعة</a> • <a href="https://ar.wikipedia.org/wiki/قحطان_(قبيلة)" target="_blank" rel="noopener">قحطان</a> • <a href="https://ar.wikipedia.org/wiki/معد_بن_عدنان" target="_blank" rel="noopener">معد بن عدنان</a></div>
-  </section>
-
-  <footer>
-    <span style="font-size:11px">آخر تحديث: أكتوبر 2026 — راجع المصادر الأصلية عند الاعتماد العلمي، وما فوق عدنان مختلف في ألفاظه</span>
-  </footer>
+  </div>
+  <div class="sec" id="src-sec">
+    <div class="sec-head"><span class="idx">٠٥</span><div><h2>المصادر التي بُني عليها السجل</h2><p>روابط مباشرة للنصوص.</p></div></div>
+    <div class="src">ابن الكلبي (ت204هـ) — جمهرة النسب، باب بنو عنز: رفيدة وأراشة ← قنان وعسير وجندلة ← مالك وتيم ← سلمة وزهير. <a href="https://shamela.ws/book/919/563" target="_blank" rel="noopener">shamela.ws/book/919/563</a></div>
+    <div class="src">ابن حزم (ت456هـ) — جمهرة أنساب العرب ص303. <a href="https://shamela.ws/book/9793/300" target="_blank" rel="noopener">shamela.ws/book/9793/300</a></div>
+    <div class="src">الهمداني (ت334هـ) — صفة جزيرة العرب: أوطان عسير من عنز (الدارة وأبها وطبب وجرشة). <a href="https://shamela.ws/book/12521/118" target="_blank" rel="noopener">shamela.ws/book/12521/118</a></div>
+    <div class="src">البلاذري (فتوح البلدان — مسجد بني عنز بالكوفة) • ابن حجر (الإصابة — عبادة بن الأشيب) • الجاسر (معجم القبائل) • النعمي (تاريخ عسير) • <a href="https://ar.wikipedia.org/wiki/عنز_بن_وائل" target="_blank" rel="noopener">عنز بن وائل</a> • <a href="https://ar.wikipedia.org/wiki/قبيلة_عسير" target="_blank" rel="noopener">قبيلة عسير</a></div>
+  </div>
+  <footer>تحقيق جديد أكتوبر 2026 — راجع الأصول عند الاعتماد العلمي • ما فوق عدنان مشهور مختلف الألفاظ</footer>
 </div>
-</div>
-
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-// ===== جذع الشجرة =====
-const spine=[
- {n:"إبراهيم الخليل عليه السلام",d:"أبو الأنبياء — الجد الأعلى",c:"prophet"},
- {n:"إسماعيل عليه السلام",d:"نشأ في جرهم — أول من نطق بالعربية الفصيحة",c:"prophet"},
- {n:"نابت (نبايوت)",d:"بكر إسماعيل — إليه يرجع مشهور نسب عدنان",c:""},
- {n:"يشجب بن نابت",d:"سلسلة عدنان المشهورة",c:""},
- {n:"يعرب بن يشجب",d:"",c:""},
- {n:"تيرح بن يعرب",d:"",c:""},
- {n:"ناحور بن تيرح",d:"",c:""},
- {n:"مقوِّم بن ناحور",d:"",c:""},
- {n:"أُدد بن مقوم",d:"جد عدنان الأقرب في المشهور",c:""},
- {n:"عدنان",d:"جد العرب العدنانية — ما فوقه مختلف في ألفاظه",c:"adnan"},
- {n:"معد بن عدنان",d:"العرب المستعربة الشمالية",c:""},
- {n:"نزار بن معد",d:"له: ربيعة ومضر وإياد وأنمار",c:""},
- {n:"ربيعة بن نزار",d:"ربيعة الفرس — أخو مضر",c:""},
- {n:"أسد بن ربيعة",d:"له: جديلة وعنزة وعميرة",c:""},
- {n:"جديلة بن أسد",d:"",c:""},
- {n:"دعمي بن جديلة",d:"",c:""},
- {n:"أفصى بن دعمي",d:"",c:""},
- {n:"هنب بن أفصى",d:"",c:""},
- {n:"قاسط بن هنب",d:"",c:""},
- {n:"وائل بن قاسط",d:"له: بكر وتغلب وعنز — إخوة",c:"adnan"},
- {n:"عنز بن وائل",d:"ولده: رفيدة وأراشة — السراة وجرش وبيشة",c:"adnan"},
- {n:"إراشة (أراشة) بن عنز",d:"⭐ جد الأغصان — ولده: عسير وقنان وجندلة",c:"irasha"},
+const SPINE=[
+ {n:"عدنان",d:"جد العدنانية",s:"ابن الكلبي / ابن حزم"},
+ {n:"معد بن عدنان",d:"المستعربة الشمالية",s:"جمهرة النسب"},
+ {n:"نزار بن معد",d:"ربيعة ومضر وإياد وأنمار",s:"ابن الكلبي"},
+ {n:"ربيعة بن نزار",d:"ربيعة الفرس",s:"ابن حزم"},
+ {n:"أسد بن ربيعة",d:"جديلة وعنزة وعميرة",s:"جمهرة العرب"},
+ {n:"جديلة بن أسد",d:"من جماجم ربيعة",s:"ابن الكلبي"},
+ {n:"دعمي بن جديلة",d:"حلقة وصل",s:"جمهرة النسب"},
+ {n:"أفصى بن دعمي",d:"—",s:"جمهرة النسب"},
+ {n:"هنب بن أفصى",d:"—",s:"جمهرة النسب"},
+ {n:"قاسط بن هنب",d:"والد وائل",s:"جمهرة النسب"},
+ {n:"وائل بن قاسط",d:"بكر وتغلب وعنز",s:"ابن الكلبي"},
+ {n:"عنز بن وائل",d:"رفيدة وأراشة — السراة وجرش",s:"باب بنو عنز"},
+ {n:"إراشة بن عنز",d:"عسير وقنان وجندلة",s:"ابن الكلبي",hl:1},
 ];
-const spineEl=document.getElementById('spine');
-spine.forEach((p,i)=>{
-  const idx=spine.length-i, d=document.createElement('div');
-  d.innerHTML=`<div class="person ${p.c}" data-i="${i}"><div class="num">${idx}</div><div><div>${p.n}</div><small>${p.d}</small></div></div>`
-    + (i<spine.length-1?'<div class="tconn"></div>':'')
-    + `<div class="detail" id="sd${i}">🧬 <b>${p.n}</b><br>${p.d||'—'}<br><span style="color:#666">المصدر: ابن الكلبي / ابن حزم / الطبري وابن الأثير لما فوق عدنان.</span></div>`;
-  spineEl.appendChild(d);
-});
-spineEl.addEventListener('click',e=>{const c=e.target.closest('.person');if(!c)return;
-  document.getElementById('sd'+c.dataset.i).classList.toggle('open');});
-
-// ===== الأغصان =====
-const T={
- name:"إراشة (أراشة) بن عنز بن وائل",sub:"الجذع الجامع — اضغط الأوراق للتوسع",icon:"🌳",cls:"root",v:"",
- info:{t:"إراشة بن عنز",b:"ولد عنز بن وائل عند ابن الكلبي: <b>رفيدة وأراشة</b>. وولد أراشة: <b>قنان وعسير وجندلة</b>. وولد عسير: مالكاً وتيماً، وولد تيم: سلمة وزهيراً."},
- children:[
-// --- غصن صلب ---
- {name:"🌿 غصن عسير الصليبي (من صلب إراشة)",sub:"عسير بن إراشة — نص الهمداني: قبيلة من عنز",icon:"🌿",cls:"true",v:"ok",vt:"✅ صلب مثبت",
-  info:{t:"عسير بن إراشة",b:"<b>عسير بن إراشة بن عنز بن وائل</b>. نص الهمداني (ق4هـ): عسير قبيلة من عنز في السراة وجرش وأبها. ولده: <b>مالك وتيم</b>."},
-  children:[
-   {name:"بنو مالك عسير 🍃",sub:"جرش ورأس وادي بيشة — منهم الشاعر ثابت العريجي",icon:"🍃",cls:"true",v:"ok",vt:"✅ صلب",
-    info:{t:"بنو مالك",b:"بطن قديم ذكره الهمداني ضمن بطون عنز/عسير في جرش وبيشة. الموطن: <b>بيشة</b>."},loc:"بيشة"},
-   {name:"بنو مغيد 🍃",sub:"أبها وطبب والدارة — من عسير السراة",icon:"🍃",cls:"true",v:"ok",vt:"✅ صلب",
-    info:{t:"بنو مغيد",b:"من بطون عسير في السراة حول أبها وطبب والدارة."},loc:"أبها"},
-   {name:"ربيعة ورفيدة — رفيدة عسير 🍃",sub:"الربعي/الرفيدي — عدنانية من رفيدة بن عنز أخي إراشة",icon:"🍃",cls:"true",v:"ok",vt:"✅ صلب — ليست رفيدة قحطان",
-    info:{t:"رفيدة عسير",b:"<b>عدنانية</b>: ترجع لرفيدة بن عنز أخي إراشة، واندمجت في عسير (ربيعة ورفيدة). الموطن: سراة رفيدة وأبها. <b>وهي غير رفيدة قحطان القحطانية</b>."},loc:"سراة رفيدة"},
-   {name:"علكم 🍃",sub:"وادي علكم وتمنية — من عسير",icon:"🍃",cls:"true",v:"ok",vt:"✅ صلب",
-    info:{t:"علكم",b:"من بطون عسير في تمنية ووادي علكم."},loc:"تمنية"},
-   {name:"بنو غنم • بنو حديد • شيبة 🍃",sub:"بطون ذكرها الهمداني في قرى عسير",icon:"🍃",cls:"true",v:"ok",vt:"✅ ذكر قديم",
-    info:{t:"بطون الهمداني",b:"ذكر الهمداني في صفة جزيرة العرب بطوناً لعنز/عسير منها بنو غنم وبنو حديد وشيبة متوزعة على قرى عسير."}},
-   {name:"تيم بن عسير ← سلمة وزهير 📜",sub:"ولد تيم: سلمة وزهير — بطون قديمة",icon:"📜",cls:"old",v:"info",vt:"📜 قديم",
-    info:{t:"تيم",b:"عند ابن الكلبي: ولد عسير مالكاً وتيماً، وولد تيم سلمة وزهيراً."}},
-  ]},
-// --- غصن الحلف ---
- {name:"✋ غصن الأحلاف والجوار (ليسوا صلباً)",sub:"جيران إراشة في الديار — دخلوا حلف عسير",icon:"🤝",cls:"ally",v:"warn",vt:"✋ حلف — ليس صلباً",
-  info:{t:"الأحلاف",b:"قبائل قحطانية الأصل سكنت ديار عنز ودخلت حلف عسير جواراً ومصاهرة. إثباتها هنا للجوار لا للنسب."},
-  children:[
-   {name:"شهران (شعف إراشة) 🍂",sub:"الأصل خثعم — سكنت ديار إراشة فسمي شعف شهران",icon:"🍂",cls:"ally",v:"warn",vt:"✋ حلف — الأصل خثعم",
-    info:{t:"شهران",b:"<b>خثعمية الأصل</b> (شهران بن عفرس بن حلف بن خثعم). سكنت <b>شعف إراشة</b> (ديار عنز القديمة) ودخلت الجوار والحلف. نسبتها لعنز قول شعبي متأخر. الموطن: خميس مشيط ووادي شهران وبيشة."},loc:"خميس مشيط",
-    children:[
-     {name:"بنو واهب شهران",sub:"وادي شهران وخميس مشيط",icon:"🍂",cls:"ally",loc:"خميس مشيط",info:{t:"بنو واهب",b:"من أكبر بطون شهران في وادي شهران وخميس مشيط."}},
-     {name:"شعف شهران",sub:"مرتفعات شعف إراشة القديمة",icon:"🍂",cls:"ally",loc:"شعف شهران",info:{t:"الشعف",b:"الشعف: المرتفعات الشرقية — ديار إراشة القديمة التي سكنتها شهران."}},
-    ]},
-   {name:"وادعة 🍂",sub:"همدانية قحطانية — ظهران الجنوب — حلف لا صلب",icon:"🍂",cls:"ally",v:"warn",vt:"✋ حلف — همدان",
-    info:{t:"وادعة",b:"<b>قبيلة همدانية قحطانية</b> (وادعة همدان)، موطنها <b>ظهران الجنوب ونجران</b>. ذُكرت ضمن قبائل منطقة عسير حلفاً وجواراً، <b>وليست من صلب إراشة بن عنز</b>."},loc:"ظهران الجنوب"},
-   {name:"بللحمر (بنو الأحمر) 🍂",sub:"أزدية من الحجر — شمال أبها — حلف لا صلب",icon:"🍂",cls:"ally",v:"warn",vt:"✋ حلف — الأزد",
-    info:{t:"بللحمر",b:"قبيلة <b>أزدية (الحجر بن الهنوء)</b> شمال أبها. ضمن نطاق عسير الجغرافي وحلفها، <b>وليست من عنز صلباً</b>."},loc:"بللحمر"},
-   {name:"بللسمر (بنو الأسمر) 🍂",sub:"أزدية من الحجر — السراة — حلف لا صلب",icon:"🍂",cls:"ally",v:"warn",vt:"✋ حلف — الأزد",
-    info:{t:"بللسمر",b:"قبيلة <b>أزدية (الحجر بن الهنوء)</b> في السراة. ضمن نطاق عسير وحلفها، <b>وليست من عنز صلباً</b>."},loc:"بللسمر"},
-   {name:"رفيدة قحطان 🍂",sub:"قحطانية مستقلة — أحد رفيدة — تشابه اسم فقط",icon:"🍂",cls:"ally",v:"warn",vt:"✋ ليست من عنز",
-    info:{t:"رفيدة قحطان",b:"قبيلة <b>قحطانية</b> مركزها <b>أحد رفيدة</b>. تشابه الاسم مع رفيدة عسير لا يعني وحدة النسب. <b>وليست من صلب عنز</b>."},loc:"أحد رفيدة"},
-  ]},
-// --- فروع قديمة ---
- {name:"📜 قنان وجندلة (فروع قديمة)",sub:"ابنا إراشة عند ابن الكلبي — قلّت أخبارهما",icon:"📜",cls:"old",v:"info",vt:"📜 قديم",
-  info:{t:"قنان وجندلة",b:"عند ابن الكلبي: ولد أراشة <b>قنان وعسير وجندلة</b>. قلّت أخبارهما في المصادر المتأخرة."},
-  children:[
-   {name:"قنان (قنّان) بن إراشة",sub:"فرع قديم",icon:"📜",cls:"old",info:{t:"قنان",b:"من ولد إراشة عند ابن الكلبي."}},
-   {name:"جندلة بن إراشة",sub:"فرع قديم",icon:"📜",cls:"old",info:{t:"جندلة",b:"من ولد إراشة عند ابن الكلبي."}},
-  ]},
-// --- انتشار ---
- {name:"📍 غصن الانتشار القديم خارج الجزيرة",sub:"الكوفة • فلسطين • مصر • الشام — بأدلة المصادر",icon:"📍",cls:"place",v:"info",vt:"📍 انتشار موثق",
-  info:{t:"الانتشار",b:"خرجت بطون من عنز مبكراً: الكوفة وفلسطين ومصر والشام، بأدلة ثابتة في المصادر."},
-  children:[
-   {name:"الكوفة 🇮🇶 — مسجد بني عنز",sub:"البلاذري: فتوح البلدان — انتشار مبكر بالعراق",icon:"📍",cls:"place",loc:"الكوفة",
-    info:{t:"الكوفة",b:"ذكر البلاذري في <b>فتوح البلدان</b> مسجد بني عنز بالكوفة — دليل وجودهم المبكر بالعراق."}},
-   {name:"فلسطين 🇵🇸 — عبادة بن الأشيب",sub:"صحابي عداده في أهل فلسطين (الإصابة)",icon:"📍",cls:"place",loc:"فلسطين",
-    info:{t:"فلسطين",b:"الصحابي <b>عبادة بن الأشيب العنزي</b>: وفد على النبي وأمّره على قومه، وعِداده في أهل فلسطين."}},
-   {name:"مصر 🇪🇬 — مالك بن زيد",sub:"حليف الأزد بمصر (ابن الكلبي)",icon:"📍",cls:"place",loc:"مصر",
-    info:{t:"مصر",b:"<b>مالك بن زيد العنزي</b> حليف الأزد بمصر — دليل انتشار عنز في مصر."}},
-   {name:"الشام/دمشق — آل الغاز الجرشي",sub:"محدثون من ذرية جرش عنز",icon:"📍",cls:"place",
-    info:{t:"آل الغاز",b:"هشام وبشر ابنا الغاز الجرشي: محدثون دمشقيون من ذرية جرش (ديار عنز)."}},
-  ]},
-// --- أعلام ---
- {name:"⭐ أعلام وصحابة من عنز",sub:"اضغط لرؤية الأعلام",icon:"⭐",cls:"place",v:"info",vt:"⭐ أعلام",
-  info:{t:"الأعلام",b:"من المنسوبين لعنز في المصادر المبكرة."},
-  children:[
-   {name:"عامر بن ربيعة العنزي ⭐",sub:"صحابي بدري — حليف آل الخطاب (ابن حزم)",icon:"⭐",cls:"place",info:{t:"عامر بن ربيعة",b:"صحابي شهد بدراً، كان حليفاً لآل الخطاب ثم دُعي لنسبه العنزي."}},
-   {name:"عبدالله بن عامر بن ربيعة ⭐",sub:"شهد بدراً مع والده واستشهد بالطائف",icon:"⭐",cls:"place",info:{t:"عبدالله",b:"ابن الصحابي عامر بن ربيعة."}},
-   {name:"طلق بن حبيب العنزي ⭐",sub:"تابعي فقيه من جرش — روى عن ابن عباس وجابر",icon:"⭐",cls:"place",info:{t:"طلق بن حبيب",b:"التابعي الفقيه العابد من جرش (ديار عنز)."}},
-  ]},
- ]
-};
-
-function leafHTML(n){
-  const has=n.children&&n.children.length;
-  return `<div class="tree-node"><button class="leaf ${n.cls||''}" data-has="${has?1:0}">
-    <span class="emoji">${n.icon||'🍃'}</span>
-    <span class="t"><b>${n.name}</b><span>${n.sub||''}</span>
-    ${n.vt?`<span class="verdict ${n.v==='ok'?'ok':n.v==='warn'?'warn':'info'}">${n.vt}</span>`:''}</span>
-    ${has?'<span class="plus">+</span>':'<span style="color:#999">●</span>'}</button>`
-    + (has?`<div class="branches ${n.cls||''}">${n.children.map(leafHTML).join('')}</div>`:'') + `</div>`;
-}
-const treeEl=document.getElementById('tree');
-treeEl.innerHTML=leafHTML(T);
-treeEl.querySelector(':scope > .tree-node > .branches').classList.add('open');
-const panel=document.getElementById('infoPanel'), body=document.getElementById('infoBody');
-function findInfo(name){
-  let found=null;
-  (function walk(n){ if(n.name===name)found=n.info; (n.children||[]).forEach(walk); })(T);
-  return found;
-}
-treeEl.addEventListener('click',e=>{
-  const card=e.target.closest('.leaf'); if(!card)return;
-  const node=card.parentElement, ch=node.querySelector(':scope > .branches');
-  const b=card.querySelector('.t b');
-  if(ch){const open=ch.classList.toggle('open'); const p=card.querySelector('.plus'); if(p)p.textContent=open?'−':'+';}
-  const inf=findInfo(b.textContent);
-  if(inf){body.innerHTML=`🍃 <b>${inf.t}</b><br>${inf.b}`; panel.classList.add('show');}
-});
-function hideInfo(){panel.classList.remove('show');}
-function expandAll(){document.querySelectorAll('.branches').forEach(c=>c.classList.add('open'));
-  document.querySelectorAll('.plus').forEach(p=>p.textContent='−');
-  document.querySelectorAll('.detail').forEach(d=>d.classList.add('open'));}
-function collapseAll(){document.querySelectorAll('#tree .branches').forEach((c,i)=>{if(i>0)c.classList.remove('open')});
-  document.querySelectorAll('.plus').forEach(p=>p.textContent='+');
-  document.querySelectorAll('.detail').forEach(d=>d.classList.remove('open'));}
-document.getElementById('q').addEventListener('input',e=>{
-  const v=e.target.value.trim();
-  document.querySelectorAll('#tree .leaf').forEach(card=>{
-    card.querySelectorAll('mark').forEach(m=>m.replaceWith(m.textContent));
-    if(!v){card.style.outline='';return;}
-    const t=card.querySelector('.t');
-    if(t.textContent.includes(v)){card.style.outline='3px solid #d64545';
-      let p=card.parentElement;
-      while(p){const ch=p.parentElement; if(ch&&ch.classList&&ch.classList.contains('branches'))ch.classList.add('open'); p=ch?ch.parentElement:null;}
-      const b=t.querySelector('b'); b.innerHTML=b.textContent.replace(v,'<mark>'+v+'</mark>');
-    } else card.style.outline='';
-  });
-});
-
-// ===== الخريطة =====
-const locs=[
- {t:"أبها",s:"🍃 بنو مغيد وربيعة ورفيدة (عسير الصلبية)",c:[18.2164,42.5052]},
- {t:"بيشة",s:"🍃 بنو مالك عسير — جرش القديمة",c:[19.9996,42.6008]},
- {t:"سراة رفيدة",s:"🍃 رفيدة عسير (عدنانية) — ليست رفيدة قحطان",c:[18.15,42.75]},
- {t:"تمنية",s:"🍃 علكم وعسير السراة",c:[18.05,42.65]},
- {t:"خميس مشيط",s:"✋ شهران (خثعم — حلف وجوار)",c:[18.3099,42.7319]},
- {t:"شعف شهران",s:"✋ شعف إراشة — ديار عنز القديمة",c:[18.15,42.9]},
- {t:"ظهران الجنوب",s:"✋ وادعة همدان (قحطانية — حلف)",c:[17.6692,43.5319]},
- {t:"أحد رفيدة",s:"✋ رفيدة قحطان (قحطانية مستقلة)",c:[18.2036,42.8236]},
- {t:"بللحمر",s:"✋ بنو الأحمر (أزد — حلف)",c:[18.35,42.45]},
- {t:"بللسمر",s:"✋ بنو الأسمر (أزد — حلف)",c:[18.45,42.38]},
- {t:"الكوفة 🇮🇶",s:"📍 مسجد بني عنز (البلاذري)",c:[32.03,44.33]},
- {t:"فلسطين 🇵🇸",s:"📍 عبادة بن الأشيب (الإصابة)",c:[31.9,35.2]},
- {t:"مصر 🇪🇬",s:"📍 مالك بن زيد حليف الأزد",c:[30.0,31.2]},
+const se=document.getElementById('spine'),si=document.getElementById('spineInfo');
+SPINE.forEach((p,i)=>{const d=document.createElement('div');d.className='step'+(p.hl?' hl':'');d.innerHTML=`<i></i><b>${p.n}</b><small>${p.d}</small>`;d.onclick=()=>{si.innerHTML=`<div class="step-detail open">◆ <b>${p.n}</b> — ${p.d}<br><span style="color:#6b7280">المصدر: ${p.s}</span></div>`;};se.appendChild(d);});
+const T={name:"إراشة بن عنز بن وائل",sub:"الجذع الجامع",icon:"◈",t:"root",info:{t:"إراشة بن عنز",b:"ولد عنز: رفيدة وأراشة. وولد أراشة: قنان وعسير وجندلة. وولد عسير: مالك وتيم. وولد تيم: سلمة وزهير (ابن الكلبي). الديار الأولى سراة عنز: جرش وأبها وبيشة."},children:[
+ {name:"عسير بن إراشة — الصلب",sub:"الهمداني: قبيلة من عنز",icon:"●",t:"sulb",bg:"✅ صلب",bc:"s",info:{t:"عسير بن إراشة",b:"عسير بن إراشة بن عنز بن وائل. قال الهمداني: الدارة وأبها وطبب أوطان عسير من عنز. ولده: مالك وتيم."},children:[
+  {name:"بنو مالك بن عسير",sub:"شمال شرق أبها — جرش وبيشة",icon:"●",t:"sulb",bg:"✅ صلب",bc:"s",info:{t:"بنو مالك",b:"بطن قديم في جرش وبيشة (الهمداني). اليوم شمال شرق أبها. الفخوذ: بني رزام، آل مجمل، آل رميان، آل يعلا، بني منبه، بني ربيعة، آل حبشي، التلادة، آل هتان، بني شدان. منهم الشاعر ثابت العريجي."},children:[
+   {name:"بني رزام • آل مجمل • آل رميان",sub:"فخوذ بني مالك",icon:"●",t:"sulb",info:{t:"فخوذ",b:"من عمائر بني مالك عسير."}},
+   {name:"ثابت العريجي — شاعر",sub:"ق3-4هـ — النوادر",icon:"★",t:"alam",bg:"★ علم",bc:"a",info:{t:"ثابت العريجي",b:"شاعر من بني مالك عسير من عنز."}}]},
+  {name:"بنو مغيد",sub:"أبها — الأمراء آل عائض",icon:"●",t:"sulb",bg:"✅ صلب",bc:"s",info:{t:"بنو مغيد",b:"أكبر بطون عسير، حاضرتها أبها. منهم آل يزيد وآل عائض (الإمارة حتى 1338هـ). العمائر: آل الوازع، آل نجد المروة، مغيد الوطأ."},children:[
+   {name:"آل الوازع • آل نجد • الوطأ",sub:"عمائر مغيد",icon:"●",t:"sulb",info:{t:"مغيد",b:"عمائر بني مغيد الكبرى."}},
+   {name:"آل يزيد وآل عائض",sub:"رؤوس عسير وإمارتها",icon:"★",t:"alam",bg:"★ أعلام",bc:"a",info:{t:"آل عائض",b:"سعيد بن مسلط المغيدي مؤسس الإمارة. منهم عائض بن مرعي وعلي بن مجثل وطامي بن شعيب."}}]},
+  {name:"ربيعة ورفيدة (عسير)",sub:"طبب — رفيدة بن عنز أخو إراشة",icon:"●",t:"sulb",bg:"✅ صلب",bc:"s",info:{t:"ربيعة ورفيدة",b:"عدنانية من رفيدة بن عنز أخي إراشة (غير رفيدة قحطان). الموطن طبب وسراة رفيدة."},children:[
+   {name:"ربيعة: آل عاصمي • بني غنمي • تيهان",sub:"وادي طبب",icon:"●",t:"sulb",info:{t:"ربيعة",b:"قبائل ربيعة عسير."}},
+   {name:"رفيدة: بنو حسن • التلادة • آل حارث",sub:"سراة رفيدة",icon:"●",t:"sulb",info:{t:"رفيدة عسير",b:"عمائر رفيدة عسير."}},
+   {name:"عامر بن ربيعة — صحابي بدري",sub:"حليف آل الخطاب",icon:"★",t:"alam",bg:"★ صحابي",bc:"a",info:{t:"عامر بن ربيعة",b:"صحابي بدري من عنز، شهد بدراً وأحداً والخندق، هاجر للحبشة، روى 22 حديثاً."}},
+   {name:"عبدالله بن عامر",sub:"شهد بدراً",icon:"★",t:"alam",info:{t:"عبدالله",b:"ابن عامر بن ربيعة."}}]},
+  {name:"علكم",sub:"تمنية ووادي حمزة",icon:"●",t:"sulb",bg:"✅ صلب",bc:"s",info:{t:"علكم",b:"من عسير السراة: بنو مازن، آل شبلي، عضاضة (عنز صلباً)، آل سعيدي، آل مقرن، آل القاسم وغيرها. وبطون الهمداني القديمة: بنو غنم وبنو حديد وشيبة."},children:[
+   {name:"بنو مازن • آل شبلي • عضاضة",sub:"عضاضة من عنز صلباً",icon:"●",t:"sulb",info:{t:"علكم",b:"من عمائر علكم."}},
+   {name:"بنو غنم • بنو حديد • شيبة",sub:"ذكر الهمداني القديم",icon:"▤",t:"old",bg:"قديم",bc:"o",info:{t:"بطون قديمة",b:"ذكرها الهمداني في قرى عسير."}}]},
+  {name:"تيم ← سلمة وزهير",sub:"عند ابن الكلبي",icon:"▤",t:"old",bg:"قديم",bc:"o",info:{t:"تيم",b:"ولد عسير مالكاً وتيماً، وولد تيم سلمة وزهيراً."},children:[
+   {name:"سلمة بن تيم",sub:"فرع قديم",icon:"▤",t:"old",info:{t:"سلمة",b:"من ولد تيم."}},
+   {name:"زهير بن تيم",sub:"فرع قديم",icon:"▤",t:"old",info:{t:"زهير",b:"من ولد تيم."}}]}
+ ]},
+ {name:"قنان وجندلة",sub:"ابنا إراشة — قلّت أخبارهما",icon:"▤",t:"old",bg:"قديم",bc:"o",info:{t:"قنان وجندلة",b:"ولد أراشة قنان وعسير وجندلة (ابن الكلبي). لا بطون معاصرة محفوظة لهما."},children:[
+  {name:"قنان بن إراشة",sub:"فرع قديم",icon:"▤",t:"old",info:{t:"قنان",b:"من ولد إراشة."}},
+  {name:"جندلة بن إراشة",sub:"فرع قديم",icon:"▤",t:"old",info:{t:"جندلة",b:"من ولد إراشة."}}]},
+ {name:"الجوار والحلف — ليس صلباً",sub:"جيران الديار في حلف عسير",icon:"◇",t:"half",bg:"حلف",bc:"h",info:{t:"الأحلاف",b:"قبائل قحطانية سكنت سراة عنز ودخلت الحلف جواراً. تذكر للجغرافيا لا للنسب."},children:[
+  {name:"شهران (خثعم)",sub:"خميس مشيط وبيشة — شعف إراشة",icon:"◇",t:"half",bg:"حلف — خثعم",bc:"h",info:{t:"شهران",b:"شهران بن عفرس بن حلف بن خثعم. سكنت شعف إراشة ودخلت الجوار. الديار: خميس مشيط ووادي شهران وبيشة وتبالة."},children:[
+   {name:"بنو واهب • معاوية • الفزع",sub:"بطون شهران",icon:"◇",t:"half",info:{t:"شهران",b:"بنو واهب أكبرها، ومعاوية في بيشة، والفزع في تبالة."}},
+   {name:"شعف شهران",sub:"ديار عنز الأولى",icon:"◇",t:"half",info:{t:"الشعف",b:"مرتفعات كانت لإراشة ثم سكنتها شهران."}}]},
+  {name:"وادعة (همدان)",sub:"ظهران الجنوب ونجران",icon:"◇",t:"half",bg:"حلف",bc:"h",info:{t:"وادعة",b:"قحطانية همدانية/أزدية. ظهران الجنوب ونجران. ليست من إراشة صلباً."},children:[
+   {name:"ظهران الجنوب",sub:"الموطن الرئيس",icon:"◇",t:"half",info:{t:"ظهران",b:"قراها ظهران وصفوان والبيضاء."}}]},
+  {name:"بللحمر وبللسمر (الحجر الأزد)",sub:"شمال أبها والسراة",icon:"◇",t:"half",bg:"حلف",bc:"h",info:{t:"الحجر",b:"من الحجر بن الهنوء الأزد. حلف لا صلب."},children:[
+   {name:"بللحمر",sub:"شمال أبها",icon:"◇",t:"half",info:{t:"بللحمر",b:"ديارها شمال أبها."}},
+   {name:"بللسمر",sub:"السراة",icon:"◇",t:"half",info:{t:"بللسمر",b:"ديارها السراة."}}]},
+  {name:"رجال ألمع (أزد شنوءة)",sub:"تهامة — عشر قبائل",icon:"◇",t:"half",bg:"حلف",bc:"h",info:{t:"ألمع",b:"أزدية (ابن حزم). متحالفة مع السراة. منها بنو قيس وبنو ظالم والمنجحة وقنا والبحر وآل موسى."},children:[
+   {name:"قبائل ألمع العشر",sub:"قيس وظالم وجونة وغيرها",icon:"◇",t:"half",info:{t:"ألمع",b:"عشر قبائل كبار."}},
+   {name:"تهامة: المنجحة وقنا وآل موسى",sub:"داعية عسير",icon:"◇",t:"half",info:{t:"تهامة",b:"الداخلة في داعية عسير."}}]},
+  {name:"رفيدة قحطان (أحد رفيدة)",sub:"مستقلة — تشابه اسم",icon:"◇",t:"half",bg:"ليست من عنز",bc:"h",info:{t:"رفيدة قحطان",b:"قحطانية مركزها أحد رفيدة. ليست من عنز."}}
+ ]},
+ {name:"الانتشار القديم",sub:"الكوفة وفلسطين ومصر والشام",icon:"◎",t:"place",bg:"موثق",bc:"p",info:{t:"الانتشار",b:"بطون خرجت مع الفتوح بأدلة ثابتة."},children:[
+  {name:"الكوفة — مسجد بني عنز",sub:"البلاذري",icon:"◎",t:"place",info:{t:"الكوفة",b:"مسجد بني عنز دليل الوجود المبكر بالعراق."}},
+  {name:"فلسطين — عبادة بن الأشيب",sub:"الإصابة",icon:"◎",t:"place",info:{t:"فلسطين",b:"صحابي عِداده في أهل فلسطين."}},
+  {name:"مصر — مالك بن زيد",sub:"حليف الأزد",icon:"◎",t:"place",info:{t:"مصر",b:"مالك بن زيد العنزي بمصر."}},
+  {name:"دمشق — آل الغاز",sub:"محدثو الشام",icon:"◎",t:"place",info:{t:"الشام",b:"هشام وبشر ابنا الغاز من جرش."}},
+  {name:"جرش — رأس بيشة",sub:"موطن عنز الأول",icon:"◎",t:"place",info:{t:"جرش",b:"جرش القديمة موطن عنز وعسير الأول."}}]},
+ {name:"أعلام من عنز",sub:"صحابة ومحدثون",icon:"★",t:"alam",bg:"أعلام",bc:"a",info:{t:"الأعلام",b:"من المنسوبين لعنز في المصادر."},children:[
+  {name:"طلق بن حبيب",sub:"فقيه جرش",icon:"★",t:"alam",info:{t:"طلق",b:"تابعي روى عن ابن عباس وجابر."}},
+  {name:"صرد بن عبدالله",sub:"فاتح جرش",icon:"★",t:"alam",info:{t:"صرد",b:"من علكم، فاتح مخلاف جرش."}},
+  {name:"ربيعة بن عامر",sub:"صحابي",icon:"★",t:"alam",info:{t:"ربيعة",b:"من رهط عامر بن ربيعة."}}]}
+]};
+function html(n,depth){const h=n.children&&n.children.length;return `<div class="nd" data-t="${n.t}"><button class="row"><span class="av">${n.icon}</span><span class="tt"><b>${n.name}</b><small>${n.sub||''}</small>${n.bg?`<span class="tag ${n.bc}">${n.bg}</span>`:''}</span>${h?'<span class="ch">+</span>':'<span style="color:#bbb">•</span>'}</button>${h?`<div class="kids${depth===0?' cols':''}">${n.children.map(c=>html(c,depth+1)).join('')}</div>`:''}</div>`;}
+const tree=document.getElementById('tree');tree.innerHTML=html(T,0);
+tree.querySelector(':scope > .nd > .kids').classList.add('open');
+function byName(nm){let f=null;(function w(n){if(n.name===nm)f=n;(n.children||[]).forEach(w);})(T);return f;}
+tree.addEventListener('click',e=>{const r=e.target.closest('.row');if(!r)return;const nd=r.parentElement,k=nd.querySelector(':scope > .kids');if(k){const o=k.classList.toggle('open');r.querySelector('.ch').textContent=o?'−':'+';}const n=byName(r.querySelector('.tt b').textContent);if(n&&n.info){let d=nd.querySelector(':scope > .rdetail');if(!d){d=document.createElement('div');d.className='rdetail';nd.insertBefore(d,r.nextSibling);}d.innerHTML=`◆ <b>${n.info.t}</b> — ${n.info.b}`;d.classList.toggle('open');}});
+function exp(){document.querySelectorAll('.kids').forEach(k=>k.classList.add('open'));document.querySelectorAll('.ch').forEach(c=>c.textContent='−');}
+function col(){document.querySelectorAll('#tree .kids').forEach((k,i)=>{if(i>0)k.classList.remove('open')});document.querySelectorAll('#tree .ch').forEach((c,i)=>c.textContent=i===0?'−':'+');}
+document.getElementById('expAll').onclick=e=>{e.preventDefault();exp();};
+document.getElementById('exp2').onclick=exp;document.getElementById('col2').onclick=col;
+document.getElementById('q').addEventListener('input',e=>{const v=e.target.value.trim();document.querySelectorAll('#tree .row').forEach(r=>{r.querySelectorAll('mark').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));if(!v){r.style.outline='';return;}if(r.textContent.includes(v)){r.style.outline='2px solid #b8860b';let p=r.parentElement;while(p){const k=p.parentElement;if(k&&k.classList&&k.classList.contains('kids'))k.classList.add('open');p=k?k.parentElement:null;}const b=r.querySelector('.tt b');b.innerHTML=b.textContent.split(v).join('<mark>'+v+'</mark>');}else r.style.outline='';});});
+const LOCS=[
+ {t:"أبها — بنو مغيد",s:"حاضرة عسير السراة (صلب)",c:[18.2164,42.5052],k:"sulb"},
+ {t:"بني مالك عسير",s:"شمال شرق أبها (صلب)",c:[18.35,42.68],k:"sulb"},
+ {t:"وادي طبب",s:"ربيعة ورفيدة العدناني (صلب)",c:[18.24,42.62],k:"sulb"},
+ {t:"سراة رفيدة",s:"رفيدة عسير — غير قحطان",c:[18.10,42.80],k:"sulb"},
+ {t:"تمنية وعلكم",s:"وادي حمزة (صلب)",c:[18.02,42.62],k:"sulb"},
+ {t:"بيشة",s:"رأس الوادي — مالك وشهران",c:[19.9996,42.6008],k:"sulb"},
+ {t:"جرش الأثرية",s:"موطن عنز الأول",c:[18.22,42.85],k:"sulb"},
+ {t:"خميس مشيط",s:"شهران خثعم (حلف)",c:[18.3099,42.7319],k:"half"},
+ {t:"شعف شهران",s:"شعف إراشة القديم",c:[18.12,42.95],k:"half"},
+ {t:"ظهران الجنوب",s:"وادعة همدان (حلف)",c:[17.6692,43.5319],k:"half"},
+ {t:"أحد رفيدة",s:"رفيدة قحطان (مستقلة)",c:[18.2036,42.8236],k:"half"},
+ {t:"بللحمر",s:"الحجر الأزد (حلف)",c:[18.38,42.45],k:"half"},
+ {t:"بللسمر",s:"الحجر الأزد (حلف)",c:[18.48,42.36],k:"half"},
+ {t:"رجال ألمع",s:"أزد شنوءة (حلف تهامة)",c:[18.62,42.10],k:"half"},
+ {t:"محايل عسير",s:"تهامة — المنجحة وقنا",c:[18.54,42.05],k:"half"},
+ {t:"الكوفة",s:"مسجد بني عنز",c:[32.03,44.33],k:"place"},
+ {t:"فلسطين",s:"عبادة بن الأشيب",c:[31.90,35.20],k:"place"},
+ {t:"مصر",s:"مالك بن زيد",c:[30.04,31.24],k:"place"},
+ {t:"دمشق",s:"آل الغاز الجرشي",c:[33.51,36.29],k:"place"},
 ];
+if(typeof L==='undefined'){document.getElementById('map').innerHTML='<div style="padding:40px;text-align:center;font-size:14px">تعذر تحميل مكتبة الخريطة — تحقق من الاتصال ثم حدّث الصفحة.<br>المواقع مذكورة نصاً في القائمة الجانبية.</div>';}else{
 const map=L.map('map',{scrollWheelZoom:false}).setView([18.4,42.7],7);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap'}).addTo(map);
-const markers={};
-locs.forEach(l=>{markers[l.t]=L.marker(l.c).addTo(map).bindPopup(`<b>${l.t}</b><br>${l.s}`);});
-const locBox=document.getElementById('locs');
-locs.forEach(l=>{const d=document.createElement('div');d.className='loc';d.innerHTML=`<b>📍 ${l.t}</b>${l.s}`;
-  d.onclick=()=>{map.flyTo(l.c,9,{duration:1});markers[l.t].openPopup();};locBox.appendChild(d);});
+const osm=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
+const mk={};
+LOCS.forEach(l=>{const col=l.k==='sulb'?'#0e7a4f':l.k==='half'?'#9a6200':'#1d5fc0';mk[l.t]=L.circleMarker(l.c,{radius:9,color:'#fff',weight:2,fillColor:col,fillOpacity:1}).addTo(map).bindPopup(`<b>${l.t}</b><br>${l.s}`);});
+const box=document.getElementById('locs');
+function render(f){box.innerHTML='';LOCS.filter(l=>f==='all'||l.k===f).forEach(l=>{const b=document.createElement('button');b.className='plc '+l.k[0];b.innerHTML=`<b>${l.t}</b>${l.s}`;b.onclick=()=>{map.flyTo(l.c,l.k==='place'?5:10,{duration:1});setTimeout(()=>mk[l.t].openPopup(),1100);};box.appendChild(b);});}
+render('all');
+document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on');render(b.dataset.f);});
+}
 </script>
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
 </body>
 </html>

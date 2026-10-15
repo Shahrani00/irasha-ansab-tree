@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>هجرات فروع إراشة إلى شمال الجزيرة — الخط الزمني</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0e3535">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f1e5;--ink:#232a33;--mut:#6b7280;--gold:#b8860b;--teal:#0e3535;--line:#e5dcc3;--card:#fffef9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Arabic',system-ui,sans-serif}
+.hero{background:radial-gradient(1000px 300px at 50% -80px,#1d5a5a 0%,transparent 60%),linear-gradient(180deg,#0c2222,#0e3535 70%,#0a2828);color:#f5edd6;padding:30px 18px 22px}
+.hero-in{max-width:1120px;margin:0 auto}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:#e8d9a8;border:1px solid #6b5a1f;border-radius:999px;padding:5px 12px;background:#ffffff10}
+.hero h1{font-family:'Amiri',serif;font-size:28px;line-height:1.8;margin:8px 0 4px}
+@media(min-width:960px){.hero h1{font-size:38px}}
+.hero h1 em{font-style:normal;color:#ffd977;border-bottom:2px solid #c9a227}
+.hero p{margin:0;color:#d8cfae;font-size:14px;line-height:2;font-weight:300;max-width:800px}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.abtn{text-decoration:none;font-weight:800;font-size:14px;border-radius:12px;padding:11px 20px}
+.abtn.gold{background:linear-gradient(180deg,#ffd977,#e0ac22);color:#0e3535}
+.abtn.ghost{border:1px solid #c9a227;color:#ffd977}
+.page{max-width:1120px;margin:0 auto;padding:18px 14px 80px;display:grid;gap:18px}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 24px #3a2f0a0d}
+@media(min-width:960px){.sec{padding:26px}}
+.sec h2{margin:0;font-size:19px}
+.sec .sub{margin:2px 0 12px;color:var(--mut);font-size:13px;line-height:2}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tools button{font-family:inherit;font-size:13px;font-weight:700;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 16px;cursor:pointer}
+.tools button.dark{background:var(--teal);color:#fff;border-color:var(--teal)}
+.tools button.on{background:var(--gold);color:#fff;border-color:var(--gold)}
+.mapwrap{display:grid;gap:12px}
+@media(min-width:960px){.mapwrap{grid-template-columns:1.5fr .9fr}}
+#map{height:400px;border-radius:14px;z-index:1;border:1px solid var(--line)}
+@media(min-width:960px){#map{height:540px}}
+.side{background:#faf7ec;border:1px solid var(--line);border-radius:14px;padding:12px;max-height:540px;overflow:auto}
+.tl{position:relative;padding-right:26px}
+.tl::before{content:"";position:absolute;right:8px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.ev{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 10px;cursor:pointer;font-size:13px;line-height:2}
+.ev::before{content:"";position:absolute;right:-24px;top:16px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--gold)}
+.ev.on{border-color:var(--gold);box-shadow:0 6px 18px #b8860b33}
+.ev b{display:block;font-size:14px}
+.ev .per{font-size:11.5px;font-weight:700;color:var(--gold)}
+.ev small{color:var(--mut)}
+.note{background:#fff8e2;border:1px solid #d9b400;border-radius:12px;padding:12px;font-size:13px;line-height:2}
+footer{text-align:center;color:var(--mut);font-size:12px;line-height:2;padding:10px}
+</style>
+</head>
+<body>
+<div class="hero"><div class="hero-in">
+  <span class="kicker">مسارات الهجرة — من سراة عنز إلى الشمال</span>
+  <h1>هجرات فروع إراشة <em>إلى شمال الجزيرة</em></h1>
+  <p>من ديار عنز الأولى (جرش وسراة أبها) خرجت بطون مع الفتوح ومن بعدها: إلى الكوفة بالعراق، وفلسطين ودمشق بالشام، ومصر — وبقيت بطون السراة في ديارها. اضغط أي محطة في الخط الزمني لترى مسارها على الخريطة.</p>
+  <div class="btnrow">
+    <a class="abtn ghost" href="index.html">⬅ عودة للسجل والخريطة</a>
+    <a class="abtn ghost" href="mindmap.html">🧠 الخريطة الذهنية</a>
+  </div>
+</div></div>
+
+<div class="page">
+  <div class="sec">
+    <h2>🗺️ خريطة المسارات</h2>
+    <p class="sub">الخطوط تقريبية للاتجاه العام للهجرة من الجنوب إلى الشمال، والنقاط المرقمة محطات موثقة بالمصادر.</p>
+    <div class="tools">
+      <button class="dark" id="tour">▶ تشغيل الرحلة عبر الزمن</button>
+      <button id="stop" style="display:none">⏹ إيقاف</button>
+      <button data-r="all" class="on">كل المسارات</button>
+      <button data-r="iraq">طريق العراق</button>
+      <button data-r="sham">طريق الشام</button>
+      <button data-r="egypt">طريق مصر</button>
+      <button data-r="sarah">الباقون في السراة</button>
+    </div>
+    <div class="mapwrap">
+      <div id="map"></div>
+      <div class="side"><div class="tl" id="timeline"></div></div>
+    </div>
+  </div>
+  <div class="sec">
+    <h2>⏳ الخط الزمني للهجرات</h2>
+    <p class="sub">التواريخ تقريبية مستنبطة من عصر الفتوح وأخبار الأعلام في المصادر.</p>
+    <div id="chrono"></div>
+    <div class="note" style="margin-top:10px">⚠️ أمانة علمية: الثابت بالمصادر هو <b>المواطن</b> (مسجد بني عنز بالكوفة، عبادة بن الأشيب بفلسطين، مالك بن زيد بمصر، آل الغاز بدمشق)؛ أما <b>تواريخ الارتحال الدقيقة</b> فغير محفوظة لعنز بعينها، ورُبطت هنا بعصر الفتوح (ق1هـ/7م) الذي خرجت فيه ربيعة إلى الأمصار.</div>
+  </div>
+  <footer>مسارات هجرات فروع إراشة — أكتوبر 2026 — المصادر: البلاذري (فتوح البلدان) • ابن حجر (الإصابة) • ابن الكلبي (جمهرة النسب)</footer>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const ROUTES=[
+ {id:'iraq',name:'طريق العراق — الكوفة',color:'#1d5fc0',per:'ق 1هـ / 7م — عهد الفتوح',
+  pts:[[18.3,42.7],[21,43.3],[24.5,43.8],[28,44.2],[30.5,44.3],[32.03,44.33]],
+  stops:[{t:'جرش — الديار الأم',d:'موطن عنز وعسير الأول (الهمداني)'},{t:'الكوفة — مسجد بني عنز',d:'ذكره البلاذري في فتوح البلدان — دليل الوجود المبكر بالعراق'}],
+  txt:'مع الفتوح خرجت بطون ربيعة ومنها عنز إلى العراق، وكان لهم مسجد يُنسب إليهم بالكوفة.'},
+ {id:'sham',name:'طريق الشام — فلسطين ودمشق',color:'#0e7a4f',per:'ق 1هـ وما بعده',
+  pts:[[18.3,42.7],[20,40.5],[23,38.5],[26.5,37],[29.5,35.8],[31.9,35.2],[33.51,36.29]],
+  stops:[{t:'جرش — الديار الأم',d:'الانطلاق من السراة'},{t:'فلسطين — عبادة بن الأشيب',d:'صحابي وفد على النبي وأُمّر على قومه، عِداده في أهل فلسطين (الإصابة)'},{t:'دمشق — آل الغاز الجرشي',d:'هشام وبشر ابنا الغاز: محدثون دمشقيون من ذرية جرش (عصور لاحقة)'}],
+  txt:'إلى فلسطين مع الفتوح، ثم استقرار متأخر لذرية جرش في دمشق طلباً للعلم والرواية.'},
+ {id:'egypt',name:'طريق مصر',color:'#9a6200',per:'ق 1-2هـ',
+  pts:[[18.3,42.7],[21,41],[24,38.5],[27,35],[29,32.5],[30.04,31.24]],
+  stops:[{t:'جرش — الديار الأم',d:'الانطلاق من السراة'},{t:'مصر — مالك بن زيد العنزي',d:'حليف الأزد بمصر (ابن الكلبي)'}],
+  txt:'وصول مبكر مع جند الفتح، ودخول في حلف الأزد بمصر.'},
+ {id:'sarah',name:'الباقون في السراة',color:'#6d3fd1',per:'مستمر حتى اليوم',
+  pts:[[18.22,42.85],[18.35,42.6],[18.2,42.5],[18.1,42.8],[18.3,42.95],[18.22,42.85]],
+  stops:[{t:'أبها وطبب والدارة',d:'بنو مغيد وربيعة ورفيدة (عسير الصلبية)'},{t:'وادي شهران وخميس مشيط',d:'شهران (حلف خثعمي)'},{t:'ظهران الجنوب',d:'وادعة (حلف همداني)'},{t:'شمال أبها والسراة',d:'بللحمر وبللسمر (حلف أزدي)'}],
+  txt:'بقيت البطون الكبرى في سراة عنز: عسير الصلبية في مواطنها، وحولها أحلاف الجوار حتى اليوم.'}
+];
+if(typeof L==='undefined'){
+  document.getElementById('map').innerHTML='<div style="padding:40px;text-align:center">تعذر تحميل مكتبة الخريطة — تحقق من الاتصال ثم حدّث الصفحة.</div>';
+}else{
+const map=L.map('map',{scrollWheelZoom:false}).setView([24,40],4);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
+const layers={},marks=[];
+ROUTES.forEach(r=>{
+  const g=L.layerGroup().addTo(map);layers[r.id]=g;
+  L.polyline(r.pts,{color:r.color,weight:4,opacity:.9,dashArray:r.id==='sarah'?'6 6':null}).addTo(g);
+  r.stops.forEach((s,i)=>{
+    const p=r.pts[i===0?0:r.pts.length-1]||r.pts[Math.min(i,r.pts.length-1)];
+    const m=L.circleMarker(p,{radius:10,color:'#fff',weight:2,fillColor:r.color,fillOpacity:1}).addTo(g)
+      .bindPopup(`<b>${s.t}</b><br>${s.d}<br><small>${r.name}</small>`);
+    m._route=r.id;marks.push(m);
+  });
+});
+function show(id){
+  document.querySelectorAll('.ev').forEach(e=>e.classList.toggle('on',e.dataset.r===id));
+  document.querySelectorAll('.tools button[data-r]').forEach(b=>b.classList.toggle('on',b.dataset.r===id||(id==='all'&&b.dataset.r==='all')));
+  Object.keys(layers).forEach(k=>{if(id==='all'||k===id)map.addLayer(layers[k]);else map.removeLayer(layers[k]);});
+  if(id!=='all'){const r=ROUTES.find(x=>x.id===id);map.flyToBounds(L.polyline(r.pts).getBounds().pad(0.3),{duration:1});}
+  else map.flyTo([24,40],4,{duration:1});
+}
+const tl=document.getElementById('timeline'),ch=document.getElementById('chrono');
+ROUTES.forEach(r=>{
+  const d=document.createElement('div');d.className='ev';d.dataset.r=r.id;
+  d.innerHTML=`<span class="per">${r.per}</span><b>${r.name}</b><small>${r.txt}</small>`;
+  d.onclick=()=>show(r.id);tl.appendChild(d);
+  const c=document.createElement('div');c.className='ev';c.dataset.r=r.id;
+  c.innerHTML=`<span class="per">${r.per}</span><b>${r.name}</b><small>${r.txt}</small><br><small>المحطات: ${r.stops.map(s=>s.t).join(' ← ')}</small>`;
+  c.onclick=()=>{show(r.id);document.getElementById('map').scrollIntoView({behavior:'smooth'});};ch.appendChild(c);
+});
+document.querySelectorAll('.tools button[data-r]').forEach(b=>b.onclick=()=>{stopTour();show(b.dataset.r);});
+// جولة متحركة
+let ti=null,order=['iraq','sham','egypt','sarah'];
+function stopTour(){if(ti){clearInterval(ti);ti=null;}document.getElementById('stop').style.display='none';document.getElementById('tour').style.display='';}
+document.getElementById('tour').onclick=()=>{
+  let i=0;document.getElementById('tour').style.display='none';document.getElementById('stop').style.display='';
+  show(order[0]);ti=setInterval(()=>{i++;if(i>=order.length){stopTour();show('all');return;}show(order[i]);},4500);
+};
+document.getElementById('stop').onclick=()=>{stopTour();};
+}
+</script>
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
+</body>
+</html>
