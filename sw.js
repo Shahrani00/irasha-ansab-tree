@@ -1,4 +1,4 @@
-const CORE='irasha-v1', RT='irasha-rt';
+const CORE='irasha-v2', RT='irasha-rt';
 const SHELL=['./','./index.html','./mindmap.html','./migrations.html','./manifest.json'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CORE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CORE&&k!==RT).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
