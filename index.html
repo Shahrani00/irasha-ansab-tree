@@ -120,6 +120,17 @@ mark{background:#ffe45e;border-radius:4px}
   <div class="searchbar"><input id="q" placeholder="ابحث في السجل: مغيد، علكم، شهران، وادعة، الكوفة…"></div>
 </div></div>
 <div style="background:#0a2828;padding:0 18px 20px"><div style="max-width:1120px;margin:0 auto;display:flex;gap:10px;flex-wrap:wrap"><a href="mindmap.html" style="flex:1;min-width:260px;display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(180deg,#ffd977,#e0ac22);color:#0e3535;font-weight:800;font-size:15px;text-decoration:none;border-radius:14px;padding:14px 18px;box-shadow:0 10px 30px #0006">🧠 الخريطة الذهنية التفاعلية</a><a href="migrations.html" style="flex:1;min-width:260px;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #c9a227;color:#ffd977;font-weight:800;font-size:15px;text-decoration:none;border-radius:14px;padding:14px 18px">🧭 هجرات الفروع شمالاً + الخط الزمني</a></div></div>
+
+<!-- قسم التثبيت كتطبيق جوال (PWA) -->
+<div style="background:#0e3535;color:#f5edd6;border:1px solid #c9a227;border-radius:16px;padding:18px;margin-top:24px;max-width:1120px;margin-left:auto;margin-right:auto">
+  <h2 style="margin:0 0 10px;font-family:'Amiri',serif;color:#ffd977">📱 تطبيق الجوال — تثبيت مباشرة (PWA)</h2>
+  <p style="margin:0 0 14px;font-size:13px;line-height:2;color:#d8cfae">ثبّت السجل كتطبيق على جوالك — يفتح بملء الشاشة ويعمل دون إنترنت، ولا يحتاج متجراً.</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <button id="installBtn" style="display:none;padding:12px 18px;border-radius:12px;border:none;background:#ffd977;color:#0e3535;font-weight:800;font-family:inherit;cursor:pointer">تثبيت التطبيق (أندرويد)</button>
+    <a href="#" onclick="return iosInstallHelp()" style="padding:12px 18px;border-radius:12px;border:1px solid #c9a227;color:#ffd977;font-weight:800;text-decoration:none;font-family:inherit">آيفون — إضافة للشاشة الرئيسية</a>
+  </div>
+  <p style="margin:10px 0 0;font-size:12px;color:#a8b8c0">آيفون: افتح الرابط في سفاري ← زر المشاركة (مربع بسهم) ← "إضافة إلى الشاشة الرئيسية".</p>
+</div>
 <div class="nav"><div class="nav-in">
   <a href="#spine-sec" class="on">الجذع</a><a href="#tree-sec">السجل الموسع</a><a href="#note-sec">ضبط الأنساب</a><a href="#map-sec">الخريطة</a><a href="#src-sec">المصادر</a>
   <a href="#" id="expAll" style="margin-right:auto">توسيع الكل</a>
@@ -273,6 +284,26 @@ function render(f){box.innerHTML='';LOCS.filter(l=>f==='all'||l.k===f).forEach(l
 render('all');
 document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on');render(b.dataset.f);});
 }
+
+// ===== تثبيت التطبيق (PWA) =====
+let installPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  installPrompt=e;
+  const btn=document.getElementById('installBtn');
+  if(btn) btn.style.display='';
+});
+const installBtn=document.getElementById('installBtn');
+if(installBtn){
+  installBtn.onclick=async()=>{
+    if(!installPrompt)return;
+    installPrompt.prompt();
+    const {outcome}=await installPrompt.userChoice();
+    installPrompt=null;
+    installBtn.style.display='none';
+  };
+}
+function iosInstallHelp(){return false;}
 </script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
 </body>
